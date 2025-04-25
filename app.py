@@ -50,7 +50,17 @@ st.markdown("""
 def main():
     # Initialize session state
     initialize_session_state()
-    
+
+    # Welcome interaction on first visit
+    if "visited" not in st.session_state:
+        st.balloons()
+        st.session_state.visited = True
+        name = st.text_input("🎨 Quel est ton prénom, explorateur d'art ?", "")
+        if name:
+            st.success(f"Bienvenue, {name} ! Prépare-toi pour une aventure artistique à travers le Maroc 🇲🇦")
+            st.toast("Clique sur une région pour commencer l'exploration ! 🎭", icon="🎒")
+            st.stop()
+
     # Navigation based on session state
     if st.session_state.page == "home":
         show_home()
